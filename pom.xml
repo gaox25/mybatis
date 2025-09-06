@@ -43,5 +43,38 @@
             <!-- 如果这里有一个scope-test，表示该jar的作用范围在test目录 -->
             <!--<scope>test</scope>-->
         </dependency>
+        <!-- hamcrest依赖 -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
+<!--            <scope>test</scope>-->
+        </dependency>
     </dependencies>
+
+    <!--
+     在build中配置resources，来防止出现资源导出失败的问题
+     1.不同的idea/maven，可能提示的错误不一样
+     2.以不变应万变，少什么文件，就增加相应的配置即可
+     3.含义是将src/main/java目录和子目录，和src/main/resources目录和子目录的资源文件
+       xml和properties在build项目时，导出到对应的target目录下
+     -->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <!-- **/*.xml表示多级目录下的所有xml文件 -->
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>
