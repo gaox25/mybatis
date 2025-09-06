@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- 解读
+     1.将mybatis作为父项目管理多个子模块/子项目
+     2.父项目的完整的坐标为groupId[组织名] + artifactId[项目名]
+     3.后面该父项目会管理多个子模块/子项目，将来父项目中引入的依赖可以直接给子项目用
+       这样开发简单，提高了复用性，也便于管理
+     -->
+    <groupId>com.gaoxi</groupId>
+    <artifactId>mybatis</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- 加入依赖 -->
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+    </dependencies>
+</project>
