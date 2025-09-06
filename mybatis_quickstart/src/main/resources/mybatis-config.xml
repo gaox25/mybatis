@@ -3,6 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!-- 配置类型别名，简化类名 -->
+    <typeAliases>
+        <typeAlias alias="Monster" type="com.gaoxi.entity.Monster"/>
+    </typeAliases>
     <environments default="development">
         <environment id="development">
             <!-- 配置事务管理器 -->
@@ -10,7 +14,7 @@
             <!-- 配置数据源 -->
             <dataSource type="POOLED">
                 <!-- 配置驱动 -->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <!-- 配置连接mysql-url
                  1.jdbc.mysql 协议
                  2.127.0.0.1:3306 指定连接的mysql的ip + port
@@ -20,7 +24,7 @@
                  6.useUnicode 表示使用unicode，作用是防止编码错误
                  7.characterEncoding=UTF-8 指定使用utf-8，防止中文乱码
                  -->
-                <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis/useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis?useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
                 <!-- 用户名 -->
                 <property name="username" value="root"/>
                 <property name="password" value=""/>

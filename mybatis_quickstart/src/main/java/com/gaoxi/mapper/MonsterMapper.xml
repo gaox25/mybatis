@@ -17,9 +17,40 @@
      6.(#{age}, #{birthday}, #{email}, #{gender}, #{name}, #{salary})是从传入的Monster对象属性传来的
      7.这里#{age} age对应Monster对象的属性名，其他一样
      -->
-    <insert id="addMonster" parameterType="com.gaoxi.entity.Monster">
+    <insert id="addMonster" parameterType="com.gaoxi.entity.Monster" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `monster`
         (`age`, `birthday`, `email`, `gender`, `name`, `salary`)
         VALUES (#{age}, #{birthday}, #{email}, #{gender}, #{name}, #{salary})
     </insert>
+    <!-- 配置/实现delMonster()方法
+     1.这里java.lang.Integer是Java类型，可以简写为Integer
+     2.这里还要写入delete语句
+     -->
+    <delete id="delMonster" parameterType="java.lang.Integer">
+        DELETE FROM monster WHERE id = #{id}
+    </delete>
+    <!-- 配置/实现updateMonster()方法
+     1.com.gaoxi.entity.Monster 可以简写
+     2.
+     -->
+<!--    <update id="updateMonster" parameterType="com.gaoxi.entity.Monster">-->
+    <!-- 适用类型别名 -->
+    <update id="updateMonster" parameterType="Monster">
+        UPDATE `monster`
+           SET `age` = #{age},
+               `birthday` = #{birthday},
+               `email` = #{email},
+               `gender` = #{gender},
+               `name` = #{name},
+               `salary` = #{salary}
+         WHERE id = #{id}
+    </update>
+    <!-- 配置/实现getMonsterById()方法 -->
+    <select id="getMonsterById" resultType="Monster">
+        SELECT * FROM `monster` WHERE id = #{id}
+    </select>
+    <!-- 配置/实现findAllMonster()方法 -->
+    <select id="findAllMonster" resultType="Monster">
+        SELECT * FROM `monster`
+    </select>
 </mapper>
