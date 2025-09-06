@@ -27,7 +27,11 @@
             </dataSource>
         </environment>
     </environments>
-<!--    <mappers>-->
-<!--        <mapper resource="org/mybatis/example/BlogMapper.xml"/>-->
-<!--    </mappers>-->
+    <!--
+     1.在这里我们配置需要关联的Mapper.xml
+     2.这里可以copy path from Source Root来获取路径
+     -->
+    <mappers>
+        <mapper resource="com/gaoxi/mapper/MonsterMapper.xml"/>
+    </mappers>
 </configuration>
