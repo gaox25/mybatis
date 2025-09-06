@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+ 1.这是一个mapper xml文件
+ 2.该文件可以去实现对应的接口的方法
+ 3.namespace用来指定该xml文件和哪个接口对应
+ -->
+<mapper namespace="com.gaoxi.mapper.MonsterMapper">
+    <!-- 配置/实现方法addMonster
+     1.id="addMonster" 就是接口的方法名
+     2.parameterType="com.gaoxi.entity.Monster" 放入的形参的类型
+     3.parameterType中的com.gaoxi.entity.Monster可以简写
+     4.写入SQL语句=>，建议先在sequel ace里先写好，再复制过来，比较安全
+     5.(`age`, `birthday`, `email`, `gender`, `name`, `salary`)表的字段
+     6.(#{age}, #{birthday}, #{email}, #{gender}, #{name}, #{salary})是从传入的Monster对象属性传来的
+     7.这里#{age} age对应Monster对象的属性名，其他一样
+     -->
+    <insert id="addMonster" parameterType="com.gaoxi.entity.Monster">
+        INSERT INTO `monster`
+        (`age`, `birthday`, `email`, `gender`, `name`, `salary`)
+        VALUES (#{age}, #{birthday}, #{email}, #{gender}, #{name}, #{salary})
+    </insert>
+</mapper>
