@@ -18,6 +18,7 @@
     <!-- modules指定管理的哪些子模块 -->
     <modules>
         <module>mybatis_quickstart</module>
+        <module>mybatis_practice</module>
     </modules>
 
     <!-- 框架的本质就是一对jar包 -->
