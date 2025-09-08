@@ -43,4 +43,7 @@ public interface MonsterMapper {
     //根据age查询结果
     public List<Monster> findMonsterByAge(@Param(value="age") Integer age);
 
+    //根据id和名字来查询结果
+    public List<Monster> findMonsterByIdAndName(Monster monster);
+
 }

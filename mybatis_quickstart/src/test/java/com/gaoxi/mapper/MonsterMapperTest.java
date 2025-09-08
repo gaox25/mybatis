@@ -174,4 +174,20 @@ public class MonsterMapperTest {
             sqlSession.close();
         }
     }
+
+    @Test
+    public void findMonsterByIdAndName() {
+        Monster monster = new Monster();
+        monster.setId(1);
+        monster.setName("elephant-0");
+        List<Monster> monsters = monsterMapper.findMonsterByIdAndName(monster);
+        for (Monster monster1 : monsters) {
+            System.out.println(monster1);
+        }
+        if (sqlSession != null) {
+            sqlSession.commit();
+            sqlSession.close();
+        }
+        System.out.println("查询成功");
+    }
 }
