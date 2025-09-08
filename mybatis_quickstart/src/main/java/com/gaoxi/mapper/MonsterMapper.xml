@@ -63,4 +63,14 @@
 <!--        SELECT * FROM `monster` WHERE `name` LIKE #{name}-->
         SELECT * FROM `monster` WHERE `name` LIKE '%${name}%'
     </select>
+    <!-- 配置/实现findMonsterByIdAndSalary_ParameterHashMap，入参是HashMap -->
+    <!-- 如果是以map形式传入参数，当以`id` > #{id}表示作为入参的map中有key为id的键值对 -->
+    <!-- 使用map作为入参，可以摆脱POJO/Entity类属性的约束 -->
+    <select id="findMonsterByIdAndSalary_ParameterHashMap" parameterType="map" resultType="Monster">
+        SELECT * FROM `monster` WHERE `id` > #{id} AND `salary` > #{salary}
+    </select>
+    <!-- 配置/实现findMonsterByIdAndSalary_ParameterHashMap_ReturnHashMap，使用map作为入参以及返回的结果 -->
+    <select id="findMonsterByIdAndSalary_ParameterHashMap_ReturnHashMap" parameterType="map" resultType="map">
+        SELECT * FROM `monster` WHERE `id` > #{id} AND `salary` > #{salary}
+    </select>
 </mapper>

@@ -3,6 +3,7 @@ package com.gaoxi.mapper;
 import com.gaoxi.entity.Monster;
 
 import java.util.List;
+import java.util.Map;
 
 /*
  1.这是一个接口，
@@ -30,5 +31,11 @@ public interface MonsterMapper {
 
     //根据name模糊查询Monster
     public List<Monster> findMonsterByName(String name);
+
+    //查询id>10并且salary>40，要求传入的参数是HashMap
+    public List<Monster> findMonsterByIdAndSalary_ParameterHashMap(Map<String, Object> map);
+
+    //查询，返回的结果为map
+    public List<Map<String, Object>> findMonsterByIdAndSalary_ParameterHashMap_ReturnHashMap(Map<String, Object> map);
 
 }

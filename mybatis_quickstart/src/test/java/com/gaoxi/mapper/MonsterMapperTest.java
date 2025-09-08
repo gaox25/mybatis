@@ -6,8 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class MonsterMapperTest {
     //属性
@@ -124,6 +123,42 @@ public class MonsterMapperTest {
         for (Monster monster : monsters) {
             System.out.println(monster);
         }
+    }
 
+    @Test
+    public void findMonsterByIdAndSalary_ParameterHashMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", 3);
+        map.put("salary", 40);
+        List<Monster> monsters = monsterMapper.findMonsterByIdAndSalary_ParameterHashMap(map);
+        for (Monster monster : monsters) {
+            System.out.println(monster);
+        }
+    }
+
+    @Test
+    public void findMonsterByIdAndSalary_ParameterHashMap_ReturnHashMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", 3);
+        map.put("salary", 40);
+        List<Map<String, Object>> monsterList = monsterMapper.findMonsterByIdAndSalary_ParameterHashMap_ReturnHashMap(map);
+        //取出返回的结果
+        for (Map<String, Object> monsterMap : monsterList) {
+//            Set<String> keys = monsterMap.keySet();
+//            for (String key : keys) {
+//                System.out.print(key + " => " + monsterMap.get(key) + "\t");
+//            }
+//            System.out.println();
+            Set<Map.Entry<String, Object>> entries = monsterMap.entrySet();
+            for (Map.Entry entry : entries) {
+                System.out.print(entry.getKey() + " => " + entry.getValue() + "\t");
+            }
+            System.out.println();
+        }
+        if (sqlSession != null) {
+            sqlSession.commit();
+            sqlSession.close();
+        }
+        System.out.println("查询成功");
     }
 }
