@@ -73,4 +73,20 @@
     <select id="findMonsterByIdAndSalary_ParameterHashMap_ReturnHashMap" parameterType="map" resultType="map">
         SELECT * FROM `monster` WHERE `id` > #{id} AND `salary` > #{salary}
     </select>
+
+    <!-- 动态SQL -->
+    <!--
+     1.配置/实现方法public List<Monster> findMonsterByAge(@Param(value="age") Integer age)
+     2.请查询age大于程序员输入的age的所有妖怪，如果程序员输入的age不大于0，则输出所有的妖怪
+     3.如果按照以前的方式配置，会有什么问题？
+     4.只有WHERE 1 = 1表示查询所有Monster
+     5.如果使用原来的#{age}在test表达式中是取不出入参值的
+     6.解决方案是使用@Param，在if:test中只使用age
+     -->
+    <select id="findMonsterByAge" resultType="Monster" parameterType="Integer">
+        SELECT * FROM `monster` WHERE 1 = 1
+        <if test="age >= 0">
+            AND age > #{age}
+        </if>
+    </select>
 </mapper>

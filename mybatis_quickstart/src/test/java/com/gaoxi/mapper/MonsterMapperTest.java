@@ -161,4 +161,17 @@ public class MonsterMapperTest {
         }
         System.out.println("查询成功");
     }
+
+    //动态SQL
+    @Test
+    public void findMonsterByAge() {
+        List<Monster> monsters = monsterMapper.findMonsterByAge(-2);
+        for (Monster monster : monsters) {
+            System.out.println(monster);
+        }
+        if (sqlSession != null) {
+            sqlSession.commit();
+            sqlSession.close();
+        }
+    }
 }

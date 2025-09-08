@@ -1,6 +1,7 @@
 package com.gaoxi.mapper;
 
 import com.gaoxi.entity.Monster;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -37,5 +38,9 @@ public interface MonsterMapper {
 
     //查询，返回的结果为map
     public List<Map<String, Object>> findMonsterByIdAndSalary_ParameterHashMap_ReturnHashMap(Map<String, Object> map);
+
+    //动态SQL
+    //根据age查询结果
+    public List<Monster> findMonsterByAge(@Param(value="age") Integer age);
 
 }
