@@ -104,4 +104,26 @@ public class MonsterMapperTest {
             sqlSession.close();
         }
     }
+
+    @Test
+    public void findMonsterByNameOrId() {
+        Monster monster = new Monster();
+        monster.setId(3);
+        monster.setName("jacket");
+        List<Monster> monsters = monsterMapper.findMonsterByNameOrId(monster);
+        System.out.println("findMonsterByNameOrId()查询结果为：");
+        for (Monster monster1 : monsters) {
+            System.out.println(monster1);
+        }
+        System.out.println("查询成功");
+    }
+
+    @Test
+    public void findMonsterByName() {
+        List<Monster> monsters = monsterMapper.findMonsterByName("牛魔王");
+        for (Monster monster : monsters) {
+            System.out.println(monster);
+        }
+
+    }
 }

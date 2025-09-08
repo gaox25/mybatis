@@ -25,4 +25,10 @@ public interface MonsterMapper {
     //查询所有的Monster
     public List<Monster> findAllMonster();
 
+    //根据id或者name查询Monster
+    public List<Monster> findMonsterByNameOrId(Monster monster);
+
+    //根据name模糊查询Monster
+    public List<Monster> findMonsterByName(String name);
+
 }

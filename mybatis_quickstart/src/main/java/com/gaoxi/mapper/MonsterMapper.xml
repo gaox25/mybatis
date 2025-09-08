@@ -53,4 +53,14 @@
     <select id="findAllMonster" resultType="Monster">
         SELECT * FROM `monster`
     </select>
+    <!-- 配置/实现findMonserByNameOrId()方法 -->
+    <select id="findMonsterByNameOrId" parameterType="com.gaoxi.entity.Monster" resultType="Monster">
+        SELECT * FROM `monster` WHERE `id` = #{id} OR `name` = #{name}
+    </select>
+    <!-- 配置/实现findMonsterByName()方法 -->
+    <!-- 如果是模糊查询，需要用${value}来接收参数 -->
+    <select id="findMonsterByName" parameterType="java.lang.String" resultType="Monster">
+<!--        SELECT * FROM `monster` WHERE `name` LIKE #{name}-->
+        SELECT * FROM `monster` WHERE `name` LIKE '%${name}%'
+    </select>
 </mapper>
