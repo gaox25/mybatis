@@ -102,7 +102,13 @@ DELETE FROM monster WHERE id = 1;
 
 UPDATE `monster` SET `age` = 20, `birthday` = NULL, `email` = 'xx@gmail.com', `gender` = 0, `name` = 'jacket', `salary` = 300 WHERE id = 3 
 
-SELECT * FROM `monster` WHERE id = '3'</string>
+SELECT * FROM `monster` WHERE id = '3'
+
+SELECT * FROM `monster` WHERE `id` = '3' OR NAME = 'jacket'
+
+SELECT * FROM `monster` WHERE `id` &gt; 10 AND `salary` &gt; 40
+
+</string>
 			<key>table</key>
 			<string>monster</string>
 			<key>view</key>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+ 1.这是一个mapper xml文件
+ 2.该文件可以去实现对应的接口的方法
+ 3.namespace用来指定该xml文件和哪个接口对应
+ -->
+<mapper namespace="com.gaoxi.mapper.UserMapper">
+    <!--
+     1.配置方法public void addUser(User user);
+     2.完成添加用户的任务，注意这里User类属性和表的字段不一致，#{}中的参数名应该和entity类中的一致
+     -->
+    <insert id="addUser" parameterType="com.gaoxi.entity.User">
+        INSERT INTO `user` (`user_email`, `user_name`) VALUES (#{useremail}, #{username});
+    </insert>
+    <!--
+     1.配置方法public List<User> findAllUser();
+     2.返回所有的user信息
+     3.按照传统的方式完成，会出现什么问题？如果entity对象属性名和表字段相同时，查询后，就会设置值，
+       如果不同，就会是默认值，包装类等引用类型则会是null
+     4.可以使用resultMap来解决问题
+     5.resultMap：表示要定义一个resultMap
+     6.id="findAllUserMap" id就是程序员指定的resultMap id，后面可以通过id来使用它
+     7.type="user" 即需要返回的对象的类型，即com.gaoxi.entity.User
+     8.<result column="user_email" property="useremail"/> 表的字段名和实体类对象的属性的映射
+     9.resultMap="findAllUserMap" 表示使用我们定义的resultMap，通过id关联
+     -->
+    <resultMap id="findAllUserMap" type="User">
+        <result column="user_email" property="useremail"/>
+        <result column="user_name" property="username"/>
+    </resultMap>
+<!--    <select id="findAllUser" resultType="User">-->
+    <select id="findAllUser" resultMap="findAllUserMap">
+        SELECT * FROM `user`
+    </select>
+
+    <!-- 也可以使用表字段别名，来解决表的字段名和对象属性名不一致的问题，可以用但是仍然推荐上面的resultMap -->
+<!--    <select id="findAllUser" resultType="User">-->
+<!--        SELECT user_id, user_email as useremail, user_name as username FROM user-->
+<!--    </select>-->
+    <!--
+     MyBatis_plus 可以使用@TableField实例类属性名和表字段名不一致的问题
+     使用@TableName来解决实体类名和表名不一致的问题
+     -->
+</mapper>
