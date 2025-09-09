@@ -124,4 +124,33 @@
             </otherwise>
         </choose>
     </select>
+    <!--
+     1.配置/实现findMonsterById_forEach
+     2.查询id为3，5，7的Monster
+     3.使用foreach标签
+     4.入参map中会如何传入id值，key = ids - [集合，比如List 3, 5, 7]，即
+       map入参中应当有ids-[3, 5, 7]
+     -->
+    <select id="findMonsterById_forEach" parameterType="map" resultType="Monster">
+        SELECT * FROM `monster`
+        <!-- 说明:
+         1.where标签
+         2.再写入相应的处理代码，比如判断ids是否为空
+         3.如果ids不为空，则使用foreach标签进行遍历
+         4.collection="ids" 对应入参map的key-ids
+         5.item="id" 在遍历ids集合时，每次取出的值对应的变量名
+         6.open="("对应的是sql id in (3, 5, 7)的左括号
+         7.separator="," 遍历出来的多个值的分隔符号
+         8.close=")"对应的是sql id in (3, 5, 7)的右括号
+         9.#{id} 对应的就是item="id"
+         -->
+        <if test="ids != null and ids != ''">
+            <where>
+                id IN
+                <foreach collection="ids" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </where>
+        </if>
+    </select>
 </mapper>

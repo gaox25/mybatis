@@ -202,4 +202,18 @@ public class MonsterMapperTest {
         }
         System.out.println("查询成功");
     }
+
+    @Test
+    public void findMonsterById_forEach() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("ids", Arrays.asList(3, 5, 7));
+        List<Monster> monsters = monsterMapper.findMonsterById_forEach(map);
+        for (Monster monster : monsters) {
+            System.out.println(monster);
+        }
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+        System.out.println("查询成功");
+    }
 }

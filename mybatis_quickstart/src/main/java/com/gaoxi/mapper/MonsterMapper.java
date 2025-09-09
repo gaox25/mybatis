@@ -49,4 +49,7 @@ public interface MonsterMapper {
     //测试choose标签的使用
     public List<Monster> findMonsterByIdOrName_choose(Map<String, Object> map);
 
+    //测试foreach标签的使用
+    public List<Monster> findMonsterById_forEach(Map<String, Object> map);
+
 }
