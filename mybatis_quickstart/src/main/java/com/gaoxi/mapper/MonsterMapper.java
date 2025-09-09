@@ -52,4 +52,7 @@ public interface MonsterMapper {
     //测试foreach标签的使用
     public List<Monster> findMonsterById_forEach(Map<String, Object> map);
 
+    //trim标签的使用
+    public List<Monster> findMonsterByName_Trim(Map<String, Object> map);
+
 }

@@ -153,4 +153,23 @@
             </where>
         </if>
     </select>
+    <!--
+     1.配置/实现public List<Monster> findMonsterByName_Trim(Map<String, Object> map)
+     2.按名字和年龄查询Monster，如果sql语句开头有and | or，就替换成where
+     3.如果要实现这个功能，使用where标签就可以实现，加入where，同时会去掉多余的and
+     -->
+    <select id="findMonsterByName_Trim" parameterType="map" resultType="Monster">
+        SELECT * FROM `monster`
+<!--        <where>-->
+        <!-- 如果发现子句开头为 and 或者 or 或者 test，就去掉，并带上where -->
+        <trim prefix="WHERE" prefixOverrides="and|or|test">
+            <if test="name != null and name != ''">
+                test `name` = #{name}
+            </if>
+            <if test="age != null and age != ''">
+                AND `age` > #{age}
+            </if>
+        </trim>
+<!--        </where>-->
+    </select>
 </mapper>

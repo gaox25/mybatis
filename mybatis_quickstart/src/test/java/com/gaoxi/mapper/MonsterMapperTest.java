@@ -216,4 +216,19 @@ public class MonsterMapperTest {
         }
         System.out.println("查询成功");
     }
+
+    @Test
+    public void findMonsterByName_Trim() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", "elephant-0");
+        map.put("age", 1);
+        List<Monster> monsters = monsterMapper.findMonsterByName_Trim(map);
+        for (Monster monster : monsters) {
+            System.out.println(monster);
+        }
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+        System.out.println("查询成功");
+    }
 }
