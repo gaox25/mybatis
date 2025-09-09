@@ -231,4 +231,17 @@ public class MonsterMapperTest {
         }
         System.out.println("查询成功");
     }
+
+    @Test
+    public void updateMonster_set() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", "elephant-1");
+        map.put("id", 3);
+        monsterMapper.updateMonster_set(map);
+        if (sqlSession != null) {
+            sqlSession.commit();
+            sqlSession.close();
+        }
+        System.out.println("更新成功");
+    }
 }

@@ -55,4 +55,7 @@ public interface MonsterMapper {
     //trim标签的使用
     public List<Monster> findMonsterByName_Trim(Map<String, Object> map);
 
+    //set标签的使用
+    public void updateMonster_set(Map<String, Object> map);
+
 }
