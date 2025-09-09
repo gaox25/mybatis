@@ -46,4 +46,7 @@ public interface MonsterMapper {
     //根据id和名字来查询结果
     public List<Monster> findMonsterByIdAndName(Monster monster);
 
+    //测试choose标签的使用
+    public List<Monster> findMonsterByIdOrName_choose(Map<String, Object> map);
+
 }

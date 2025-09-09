@@ -105,4 +105,23 @@
             </if>
         </where>
     </select>
+    <!--
+     1.配置/实现findMonsterByIdOrName_choose(Map<String, Object> map)
+     2.入参是Map
+     3.使用MyBatis提供的choose-when-otherwise标签
+     -->
+    <select id="findMonsterByIdOrName_choose" parameterType="map" resultType="Monster">
+        SELECT * FROM `monster`
+        <choose>
+            <when test="name != null and name != ''">
+                WHERE `name` = #{name}
+            </when>
+            <when test="id > 0">
+                WHERE `id` > #{id}
+            </when>
+            <otherwise>
+                WHERE `salary` > 100
+            </otherwise>
+        </choose>
+    </select>
 </mapper>

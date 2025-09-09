@@ -156,7 +156,6 @@ public class MonsterMapperTest {
             System.out.println();
         }
         if (sqlSession != null) {
-            sqlSession.commit();
             sqlSession.close();
         }
         System.out.println("查询成功");
@@ -170,7 +169,6 @@ public class MonsterMapperTest {
             System.out.println(monster);
         }
         if (sqlSession != null) {
-            sqlSession.commit();
             sqlSession.close();
         }
     }
@@ -185,7 +183,21 @@ public class MonsterMapperTest {
             System.out.println(monster1);
         }
         if (sqlSession != null) {
-            sqlSession.commit();
+            sqlSession.close();
+        }
+        System.out.println("查询成功");
+    }
+
+    @Test
+    public void findMonsterByIdOrName_choose() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", "elephant-0");
+        map.put("id", 1);
+        List<Monster> monsters = monsterMapper.findMonsterByIdOrName_choose(map);
+        for (Monster monster : monsters) {
+            System.out.println(monster);
+        }
+        if (sqlSession != null) {
             sqlSession.close();
         }
         System.out.println("查询成功");
