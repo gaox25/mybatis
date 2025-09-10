@@ -141,6 +141,9 @@ INSERT INTO person VALUES(1, 'tom', 1)
 SELECT * FROM person
 SELECT * FROM idencard
 
+#多表联查
+SELECT * FROM `person`, `idencard` WHERE `person`.id = 1 AND `person`.card_id = `idencard`.id
+
 </string>
 			<key>table</key>
 			<string>monster</string>
