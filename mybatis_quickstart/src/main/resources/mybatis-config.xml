@@ -49,5 +49,7 @@
         <mapper resource="com/gaoxi/mapper/PersonMapperAnnotation.xml"/>
         <mapper resource="com/gaoxi/mapper/UserOfPetsMapper.xml"/>
         <mapper resource="com/gaoxi/mapper/PetMapper.xml"/>
+        <mapper resource="com/gaoxi/mapper/UserOfPetsMapperAnnotation.xml"/>
+        <mapper resource="com/gaoxi/mapper/PetMapperAnnotation.xml"/>
     </mappers>
 </configuration>
