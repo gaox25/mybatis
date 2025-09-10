@@ -45,5 +45,7 @@
         <mapper resource="com/gaoxi/mapper/UserMapper.xml"/>
         <mapper resource="com/gaoxi/mapper/IdenCardMapper.xml"/>
         <mapper resource="com/gaoxi/mapper/PersonMapper.xml"/>
+        <mapper resource="com/gaoxi/mapper/IdenCardMapperAnnotation.xml"/>
+        <mapper resource="com/gaoxi/mapper/PersonMapperAnnotation.xml"/>
     </mappers>
 </configuration>
