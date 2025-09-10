@@ -43,5 +43,7 @@
     <mappers>
         <mapper resource="com/gaoxi/mapper/MonsterMapper.xml"/>
         <mapper resource="com/gaoxi/mapper/UserMapper.xml"/>
+        <mapper resource="com/gaoxi/mapper/IdenCardMapper.xml"/>
+        <mapper resource="com/gaoxi/mapper/PersonMapper.xml"/>
     </mappers>
 </configuration>

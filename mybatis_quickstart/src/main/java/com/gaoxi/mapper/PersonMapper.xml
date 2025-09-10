@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gaoxi.mapper.PersonMapper">
+    <!--
+     1.配置/实现public Person getPersonById(Integer id)
+     2.完成通过Person的id获取到Person，包括这个Person关联的IdenCard对象[级联查询]
+     3.如何实现级联查询，先试一试resultType来接收结果，分析问题-解决问题
+     4.如果使用resultType="Person"，不会报错，但是IdenCard是null，即没有实现级联查询
+     5.使用zidingyiresultMap搞定 映射返回的结果
+     6.自定义resultMap的type仍然是Person，因为getPersonById最终返回的是Person对象[只是有级联的对象属性]
+     -->
+    <resultMap id="PersonResultMap" type="Person">
+<!--        <result property="id" column="id"/>-->
+        <!-- id - 一个ID结果，标记出作为ID的结果可以帮助提高整体性能
+         1.property="id" 表示person属性id，通常是主键
+         2.column="id" 表示对应表的字段
+         -->
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <!-- association - 一个复杂类型的映射
+         1.property="card" 表示对Person对象的card属性映射
+         2.javaType="IdenCard" 表示card属性的类型
+         3.column="id" 是从下面的sql语句查询后返回的字段
+          SELECT * FROM `person`, `idencard`
+           WHERE `person`.id = 1
+             AND `person`.card_id = `idencard`.id
+         -->
+        <association property="card" javaType="com.gaoxi.entity.IdenCard">
+            <result property="id" column="id"/>
+            <result property="card_sn" column="card_sn"/>
+        </association>
+    </resultMap>
+<!--    <select id="getPersonById" parameterType="Integer" resultType="Person">-->
+    <select id="getPersonById" parameterType="Integer" resultMap="PersonResultMap">
+<!--        select * from `person` where `id` = #{id}-->
+        SELECT * FROM `person`, `idencard`
+         WHERE `person`.id = #{id}
+           AND `person`.card_id = `idencard`.id
+    </select>
+</mapper>

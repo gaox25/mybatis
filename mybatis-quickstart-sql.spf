@@ -108,6 +108,39 @@ SELECT * FROM `monster` WHERE `id` = '3' OR NAME = 'jacket'
 
 SELECT * FROM `monster` WHERE `id` &gt; 10 AND `salary` &gt; 40
 
+CREATE TABLE `user` (
+	`user_id` INT NOT NULL AUTO_INCREMENT,
+	`user_email` VARCHAR(255) DEFAULT '',
+	`user_name` VARCHAR(255) DEFAULT '',
+	PRIMARY KEY (`user_id`)
+)CHARSET=utf8
+
+INSERT INTO `user` (`user_email`, `user_name`) VALUES ('tom@gmail.com', 'tom');
+
+SELECT * FROM `user`
+
+SELECT * FROM `monster` WHERE 1 = 1 AND `age` &gt; 10
+
+CREATE TABLE person
+(
+id INT PRIMARY KEY AUTO_INCREMENT,
+`name` VARCHAR(32) NOT NULL DEFAULT '',
+card_id INT,
+FOREIGN KEY (card_id) REFERENCES idencard(id)
+)CHARSET utf8
+
+CREATE TABLE idencard
+(
+id INT PRIMARY KEY AUTO_INCREMENT,
+card_sn VARCHAR(32) NOT NULL DEFAULT ''
+)CHARSET utf8;
+
+INSERT INTO idencard VALUES(1, '11111111111110')
+INSERT INTO person VALUES(1, 'tom', 1)
+
+SELECT * FROM person
+SELECT * FROM idencard
+
 </string>
 			<key>table</key>
 			<string>monster</string>
