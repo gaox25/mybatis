@@ -24,6 +24,18 @@ public class PersonMapperTest {
     @Test
     public void findPersonById() {
         Person person = personMapper.getPersonById(1);
+        System.out.println("映射关系1对1，第一种方式：");
+        System.out.println("person = " + person);
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+        System.out.println("查询成功");
+    }
+
+    @Test
+    public void findPersonById2() {
+        Person person = personMapper.getPersonById2(1);
+        System.out.println("映射关系1对1，第二种方式：");
         System.out.println("person = " + person);
         if (sqlSession != null) {
             sqlSession.close();
