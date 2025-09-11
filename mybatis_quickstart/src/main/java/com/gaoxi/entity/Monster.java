@@ -1,10 +1,13 @@
 package com.gaoxi.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 //Monster和monster表对应，一个普通的POJO对象，实体类名和表名要保持一致
 //体现了OOP的思想
-public class Monster {
+//使用二级缓存时，entity类实现序列化接口(serializable)，因为二级缓存可能使用到序列化技术
+//不实现也是可以的，看具体情况
+public class Monster implements Serializable {
     //属性，必须和monster表中的类型相对应
     private Integer id;
     private Integer age;

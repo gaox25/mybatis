@@ -8,6 +8,18 @@
  3.namespace用来指定该xml文件和哪个接口对应
  -->
 <mapper namespace="com.gaoxi.mapper.MonsterMapper">
+    <!--
+     1.配置二级缓存
+     2.eviction：清除策略
+     3.flushInterval：刷新间隔，单位是毫秒
+     4.size：引用数目，默认是1024
+     5.readOnly：只读设置，默认为false，如果只是用于读操作，建议设置成true，这样可以提升效率
+       如果有修改操作，则设置成false
+     -->
+    <cache eviction="FIFO"
+           flushInterval="60000"
+           size="512"
+           readOnly="true"/>
     <!-- 配置/实现方法addMonster
      1.id="addMonster" 就是接口的方法名
      2.parameterType="com.gaoxi.entity.Monster" 放入的形参的类型

@@ -330,4 +330,68 @@ public class MonsterMapperTest {
             sqlSession.close();
         }
     }
+
+    //测试二级缓存
+    @Test
+    public void level2CacheTest() {
+        //第一次查询id=3的Monster
+        Monster monster = monsterMapper.getMonsterById(3);
+        System.out.println("monster = " + monster);
+
+        //关闭sqlSession
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+
+        //第二次查询id=3的Monster
+        System.out.println("=== 虽然前面关闭了sqlSession，因为此时配置了二级缓存，" +
+                           "当再次查询相同id时，依然不会再发出sql，而是从二级缓存中获取数据 ===");
+        //重新获取sqlSession和monsterMapper
+        sqlSession = MyBatisUtils.getSqlSession();
+        monsterMapper = sqlSession.getMapper(MonsterMapper.class);
+        Monster monster2 = monsterMapper.getMonsterById(3);
+        //Monster monster2 = monsterMapper.getMonsterById(5);
+        System.out.println("monster2 = " + monster2);
+
+        //第三次查询id=3的Monster
+        Monster monster3 = monsterMapper.getMonsterById(3);
+        //Monster monster2 = monsterMapper.getMonsterById(5);
+        System.out.println("monster3 = " + monster3);
+
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+    }
+
+    //测试二级缓存的使用
+    @Test
+    public void level2CacheTest2() {
+        //第一次查询id=3的Monster
+        Monster monster = monsterMapper.getMonsterById(3);
+        System.out.println("monster = " + monster);
+
+        //关闭sqlSession
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+
+        //第二次查询id=3的Monster
+        System.out.println("=== 虽然前面关闭了sqlSession，因为此时配置了二级缓存，" +
+                "当再次查询相同id时，依然不会再发出sql，而是从二级缓存中获取数据 ===");
+        //重新获取sqlSession和monsterMapper
+        sqlSession = MyBatisUtils.getSqlSession();
+        monsterMapper = sqlSession.getMapper(MonsterMapper.class);
+        Monster monster2 = monsterMapper.getMonsterById(3);
+        //Monster monster2 = monsterMapper.getMonsterById(5);
+        System.out.println("monster2 = " + monster2);
+
+        //第三次查询id=3的Monster
+        Monster monster3 = monsterMapper.getMonsterById(3);
+        //Monster monster2 = monsterMapper.getMonsterById(5);
+        System.out.println("monster3 = " + monster3);
+
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+    }
 }
