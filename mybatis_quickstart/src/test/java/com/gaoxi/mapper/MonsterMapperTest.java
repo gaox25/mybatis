@@ -394,4 +394,34 @@ public class MonsterMapperTest {
             sqlSession.close();
         }
     }
+
+    //演示 二级缓存 -> 一级缓存 -> DB 的执行顺序
+    //1.不会出现一级缓存和二级缓存中有同一个数据，因为二级缓存是在一级缓存关闭之后才有的
+    @Test
+    public void cacheSeqTest() {
+        System.out.println("查询第1次，查询DB");
+        Monster monster1 = monsterMapper.getMonsterById(3);
+        System.out.println(monster1);
+
+        //这里关闭sqlSession，一级缓存数据没有了
+        //当关闭一级缓存的时候，如果开启了二级缓存，那么一级缓存的数据会放入到二级缓存中
+        sqlSession.close();
+
+        sqlSession = MyBatisUtils.getSqlSession();
+        monsterMapper = sqlSession.getMapper(MonsterMapper.class);
+        System.out.println("查询第2次，因为关闭sqlSession，所以二级缓存获取，如果没有关闭，就是从一级缓存获取");
+        //从二级缓存获取id=3的Monster，不会发出sql
+        Monster monster2 = monsterMapper.getMonsterById(3);
+        System.out.println(monster2);
+
+        System.out.println("查询第3次");
+        //从二级缓存获取id=3的Monster，不会发出sql
+        Monster monster3 = monsterMapper.getMonsterById(3);
+        System.out.println(monster3);
+
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+
+    }
 }
