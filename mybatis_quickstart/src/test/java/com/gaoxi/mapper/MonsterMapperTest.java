@@ -244,4 +244,90 @@ public class MonsterMapperTest {
         }
         System.out.println("更新成功");
     }
+
+    //测试一级缓存
+    @Test
+    public void level1CacheTest() {
+        //第一次查询id=3的Monster
+        Monster monster = monsterMapper.getMonsterById(3);
+        System.out.println("monster = " + monster);
+
+        System.out.println("===因为一级缓存默认是打开的，当再次重复查询相同id时，不会再发出sql===");
+
+        //第二次查询id=3的Monster，直接从一级缓存获取，不会再发出sql，如果查询其他id的，则会再发出sql
+        Monster monster2 = monsterMapper.getMonsterById(3);
+        //Monster monster2 = monsterMapper.getMonsterById(5);
+        System.out.println("monster2 = " + monster2);
+
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+    }
+
+    //测试一级缓存失效
+    //关闭sqlSession后，一级缓存失效
+    @Test
+    public void level1CacheTest2() {
+        //第一次查询id=3的Monster
+        Monster monster = monsterMapper.getMonsterById(3);
+        System.out.println("monster = " + monster);
+        //关闭sqlSession，一级缓存失效
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+
+        System.out.println("=== 如果关闭了sqlSession，当再次查询相同的id时，会再次发出sql ===");
+
+        //再次查询id=3的monster，因为关闭了sqlSession，所以需要重新初始化sqlSession和monsterMapper
+        sqlSession = MyBatisUtils.getSqlSession();
+        MonsterMapper mapper = sqlSession.getMapper(MonsterMapper.class);
+        Monster monster2 = mapper.getMonsterById(3);
+        //Monster monster2 = monsterMapper.getMonsterById(5);
+        System.out.println("monster2 = " + monster2);
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+    }
+
+    //测试一级缓存失效
+    //如何执行了sqlSession.clearCatch()，会导致一级缓存失效
+    @Test
+    public void level1CacheTest3() {
+        //第一次查询id=3的Monster
+        Monster monster = monsterMapper.getMonsterById(3);
+        System.out.println("monster = " + monster);
+
+        sqlSession.clearCache();
+        System.out.println("=== 如果执行了sqlSession.clearCatch()，当你再次查询相同的id时，仍然会发出sql ===");
+
+        Monster monster2 = monsterMapper.getMonsterById(3);
+        System.out.println("monster2 = " + monster2);
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+    }
+
+    //测试一级缓存失效
+    //如果修改了同一个对象，会导致一级缓存[对象数据]失效
+    @Test
+    public void level1CacheTest4() {
+        //第一次查询id=3的Monster
+        Monster monster = monsterMapper.getMonsterById(3);
+        System.out.println("monster = " + monster);
+
+        //如果修改了同一个对象，会导致一级缓存[对象数据]失效
+        //修改id=3的Monster对象
+        monster.setName("buffalo=0");
+        monsterMapper.updateMonster(monster);
+
+        //第二次查询id=3的Monster
+        System.out.println("=== 当修改了同一个对象，当再次查询同一个id时，仍然会发出sql ===");
+        Monster monster2 = monsterMapper.getMonsterById(3);
+        System.out.println("monster2 = " + monster2);
+        if (sqlSession != null) {
+            //这里需要commit()
+            sqlSession.commit();
+            sqlSession.close();
+        }
+    }
 }
